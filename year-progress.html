@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Year Progress</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 16px;
+    background: transparent;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .progress-container {
+    width: 340px;
+    height: 34px;
+    border: 2px solid #3a3a3a;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #3a3a3a;
+    transition: width 0.8s ease;
+  }
+
+  .label {
+    font-size: 14px;
+    color: #3a3a3a;
+    white-space: nowrap;
+  }
+</style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="progress-container">
+      <div class="progress-bar" id="bar"></div>
+    </div>
+    <div class="label" id="label">Year: 0%</div>
+  </div>
+
+<script>
+  const now = new Date();
+
+  const start = new Date(now.getFullYear(), 0, 1);
+  const end = new Date(now.getFullYear() + 1, 0, 1);
+
+  const progress = ((now - start) / (end - start)) * 100;
+
+  const percent = Math.min(100, Math.max(0, progress));
+
+  document.getElementById("bar").style.width = percent.toFixed(1) + "%";
+  document.getElementById("label").innerText = `Year: ${percent.toFixed(0)}%`;
+</script>
+</body>
+</html>
