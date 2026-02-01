@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Year Progress</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .progress-container {
+    width: 320px;
+    height: 28px;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    border-radius: 6px;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: rgba(255, 255, 255, 0.9);
+    transition: width 0.6s ease;
+  }
+
+  .label {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 420px) {
+    .progress-container {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="progress-container">
+      <div class="progress-bar" id="bar"></div>
+    </div>
+    <div class="label" id="label">Year 0%</div>
+  </div>
+
+<script>
+  const now = new Date();
+
+  const startOfYear = new Date(now.getFullYear(), 0, 1);
+  const startOfNextYear = new Date(now.getFullYear() + 1, 0, 1);
+
+  const progress =
+    (now - startOfYear) / (startOfNextYear - startOfYear);
+
+  const percent = Math.min(1, Math.max(0, progress));
+
+  document.getElementById("bar").style.width =
+    (percent * 100).toFixed(1) + "%";
+
+  document.getElementById("label").innerText =
+    `Year ${Math.round(percent * 100)}%`;
+</script>
+</body>
+</html>
